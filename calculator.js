@@ -48,7 +48,7 @@ class Calculator {
         throw new Error('"radicand" must be non-negative');
       }
   
-      return radicand * 0.5;
+      return radicand ** 0.5;
     }
   }
   
