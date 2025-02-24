@@ -1,0 +1,24 @@
+{
+  "name": "szakdolgozat_unittesting",
+  "version": "1.0.0",
+  "description": "Ide lesznek feltöltve a példák unit tesztelésről a szakdolgozatomhoz, amiben a Jest keretrendszert fogom használni.",
+  "main": "calculator.js",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vargazsolt0924/Szakdolgozat_UnitTesting.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/vargazsolt0924/Szakdolgozat_UnitTesting/issues"
+  },
+  "homepage": "https://github.com/vargazsolt0924/Szakdolgozat_UnitTesting#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
