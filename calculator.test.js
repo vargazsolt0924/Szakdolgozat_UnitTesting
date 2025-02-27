@@ -31,7 +31,7 @@ describe('Calculator', () => {
   });
 
   test('should throw error when subtract is called with one parameter', () => {
-    expect(() => calculator.subtract(5)).toThrow();
+    expect(() => calculator.subtract(5)).toThrow(Error);
   });
 
   // divide() tesztek
