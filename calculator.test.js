@@ -3,7 +3,7 @@ const Calculator = require('./calculator');
 describe('Calculator', () => {
   let calculator;
 
-  beforeEach(() => {
+  beforeAll(() => {
     calculator = new Calculator();
   });
 
