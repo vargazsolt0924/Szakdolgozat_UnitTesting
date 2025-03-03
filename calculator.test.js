@@ -1,4 +1,5 @@
 const Calculator = require('./calculator');
+const testData = require('./testData');
 
 describe('Calculator', () => {
   let calculator;
@@ -8,73 +9,42 @@ describe('Calculator', () => {
   });
 
   describe('add()', () => {
-    test('should add numbers correctly', () => {
-      expect(calculator.add(2, 3)).toBe(5);
-      expect(calculator.add(1, 2, 3, 4)).toBe(10);
-    });
-
-    test('should throw error when no parameters are provided', () => {
-      expect(() => calculator.add()).toThrow('Not enough parameters to perform this operation');
-    });
-
-    test('should throw error when input is not a number', () => {
-      expect(() => calculator.add(2, "text")).toThrow(TypeError);
+    test.each(testData.additionCases)('should add numbers correctly', ({ inputs, expected }) => {
+      expect(calculator.add(...inputs)).toBe(expected);
     });
   });
 
   describe('subtract()', () => {
-    test('should subtract numbers correctly', () => {
-      expect(calculator.subtract(10, 4)).toBe(6);
-    });
-
-    test('should subtract correctly when second parameter is zero', () => {
-      expect(calculator.subtract(5, 0)).toBe(5);
-    });
-
-    test('should throw error when subtract is called with one parameter', () => {
-      expect(() => calculator.subtract(5)).toThrow(Error);
+    test.each(testData.subtractionCases)('should subtract numbers correctly', ({ inputs, expected }) => {
+      expect(calculator.subtract(...inputs)).toBe(expected);
     });
   });
 
   describe('divide()', () => {
-    test('should divide numbers correctly', () => {
-      expect(calculator.divide(10, 2)).toBe(5);
-    });
-
-    test('should return 0 when first parameter of divide is 0', () => {
-      expect(calculator.divide(0, 5)).toBe(0);
-    });
-
-    test('should throw error when dividing by zero', () => {
-      expect(() => calculator.divide(10, 0)).toThrow('"divisor" cannot be 0');
+    test.each(testData.divisionCases)('should divide numbers correctly', ({ inputs, expected }) => {
+      expect(calculator.divide(...inputs)).toBe(expected);
     });
   });
 
   describe('multiply()', () => {
-    test('should multiply numbers correctly', () => {
-      expect(calculator.multiply(2, 3, 4)).toBe(24);
-    });
-
-    test('should return 0 when multiplying with 0', () => {
-      expect(calculator.multiply(5, 0)).toBe(0);
-    });
-
-    test('should throw error when no parameters are provided for multiply', () => {
-      expect(() => calculator.multiply()).toThrow('Not enough parameters to perform this operation');
+    test.each(testData.multiplicationCases)('should multiply numbers correctly', ({ inputs, expected }) => {
+      expect(calculator.multiply(...inputs)).toBe(expected);
     });
   });
 
   describe('squareRoot()', () => {
-    test('should calculate square root correctly', () => {
-      expect(calculator.squareRoot(9)).toBe(3);
+    test.each(testData.squareRootCases)('should calculate square root correctly', ({ input, expected }) => {
+      expect(calculator.squareRoot(input)).toBe(expected);
     });
+  });
 
-    test('should return 0 when taking the square root of 0', () => {
-      expect(calculator.squareRoot(0)).toBe(0);
-    });
-
-    test('should throw error for negative square root', () => {
-      expect(() => calculator.squareRoot(-4)).toThrow('"radicand" must be non-negative');
+  describe('Error handling', () => {
+    test.each(testData.errorCases)('should throw expected errors', ({ method, inputs, error, errorType }) => {
+      if (error) {
+        expect(() => calculator[method](...inputs)).toThrow(error);
+      } else if (errorType) {
+        expect(() => calculator[method](...inputs)).toThrow(errorType);
+      }
     });
   });
 });
